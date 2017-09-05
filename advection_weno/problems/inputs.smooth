@@ -32,4 +32,4 @@ yrboundary = periodic
 u = 1.0
 v = 1.0
 
-weno_order = 3
+weno_order = 5
