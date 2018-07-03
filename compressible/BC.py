@@ -214,7 +214,17 @@ def user(bc_name, bc_edge, variable, ccdata):
 
 
 def inflow_post_bc(var, g):
-    # inflow boundary condition with post shock setup
+    """ 
+    Inflow boundary condition with post shock setup
+    
+    Parameters
+    ----------
+    
+    var: string
+        Name of the variable being set
+    g: float
+        Adiabatic constant
+    """
     r_l = 8.0
     u_l = 7.1447096
     v_l = -4.125
@@ -233,7 +243,17 @@ def inflow_post_bc(var, g):
 
 
 def inflow_pre_bc(var, g):
-    # pre shock setup
+    """
+    Pre shock setup
+    
+    Parameters
+    ----------
+    
+    var: string
+        Name of the variable being set
+    g: float
+        Adiabatic constant
+    """
     r_r = 1.4
     u_r = 0.0
     v_r = 0.0

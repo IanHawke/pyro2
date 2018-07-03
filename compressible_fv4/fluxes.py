@@ -10,6 +10,9 @@ import mesh.array_indexer as ai
 
 
 def flux_cons(ivars, idir, gamma, q):
+    """
+    Compute pointwise fluxes in one direction
+    """
 
     flux = q.g.scratch_array(nvar=ivars.nvar)
 
@@ -39,6 +42,9 @@ def flux_cons(ivars, idir, gamma, q):
 
 
 def fluxes(myd, rp, ivars, solid, tc):
+    """
+    Compute the fluxes through cell interfaces in both x and y directions
+    """
 
     alpha = 0.3
     beta = 0.3

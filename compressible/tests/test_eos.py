@@ -2,6 +2,9 @@ import compressible.eos as eos
 
 
 def test_eos_consistency():
+    """
+    Check that the equation of state is self-consistent.
+    """
 
     dens = 1.0
     eint = 1.0
