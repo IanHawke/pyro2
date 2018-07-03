@@ -30,6 +30,9 @@ class PyroTest(object):
 def do_tests(build, out_file, do_standalone=True, do_main=True,
              reset_fails=False, store_all_benchmarks=False,
              single=None, solver=None):
+    """
+    Run regression tests.
+    """
 
     # make sure we've built stuff
     print("build = ", build)
