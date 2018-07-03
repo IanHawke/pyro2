@@ -35,6 +35,10 @@ def define_bc(bc_type, function, is_solid=False):
 
 
 def _set_reflect(odd_reflect_dir, dir_string):
+    """
+    Internal function to help with string representations of
+    reflecting BCs.
+    """
     if odd_reflect_dir == dir_string:
         return "reflect-odd"
     else:
