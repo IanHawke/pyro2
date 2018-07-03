@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 
 
 def plot_convergence():
-
+    """
+    Plot grid convergence, which is error vs resolution.
+    """
+    
     data4 = np.loadtxt("advection_fv4_convergence.txt")
 
     nx = data4[:, 0]
