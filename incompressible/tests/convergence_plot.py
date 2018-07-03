@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 
 
 def plot_convergence():
+    """
+    Plot grid convergence, which is error vs resolution.
+    """
 
     data = np.loadtxt("incomp_converge.txt")
 
