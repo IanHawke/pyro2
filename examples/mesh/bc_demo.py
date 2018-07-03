@@ -8,6 +8,9 @@ import mesh.boundary as bnd
 
 
 def doit():
+    """
+    Build a mesh and demonstrate boundary conditions on it.
+    """
 
     myg = mesh.patch.Grid2d(4, 4, ng=2, xmax=1.0, ymax=1.0)
 
