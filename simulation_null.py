@@ -6,6 +6,9 @@ from util import msg, profile
 
 
 def grid_setup(rp, ng=1):
+    """
+    Default grid setup
+    """
     nx = rp.get_param("mesh.nx")
     ny = rp.get_param("mesh.ny")
 
@@ -40,7 +43,9 @@ def grid_setup(rp, ng=1):
 
 
 def bc_setup(rp):
-
+    """
+    Default boundary setup, unless parameters are set
+    """
     # first figure out the BCs
     try:
         xlb_type = rp.get_param("mesh.xlboundary")

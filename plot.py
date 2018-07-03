@@ -33,7 +33,14 @@ def makeplot(plotfile_name, outfile, width, height):
 
 
 def get_args():
-
+    """
+    Get the command line arguments.
+    
+    -o      : Output filename
+    -W      : Plot width
+    -H      : Plot height
+    plotfile: pyro h5 saved file you wish to plot
+    """
     parser = argparse.ArgumentParser()
 
     parser.add_argument("-o", type=str, default="plot.png",
