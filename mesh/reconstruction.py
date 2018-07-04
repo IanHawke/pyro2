@@ -118,7 +118,15 @@ def limit4(a, myg, idir):
 
 
 def flatten(myg, q, idir, ivars, rp):
-    """ compute the 1-d flattening coefficients """
+    """ 
+    Compute the 1-d flattening coefficients
+    
+    Notes
+    -----
+    
+    This routine is *specific* to compressible hydrodynamics.
+    Only use with other solvers if you're sure it does what you want!
+    """
 
     xi = myg.scratch_array()
     z = myg.scratch_array()
@@ -162,7 +170,15 @@ def flatten(myg, q, idir, ivars, rp):
 
 
 def flatten_multid(myg, q, xi_x, xi_y, ivars):
-    """ compute the multidimensional flattening coefficient """
+    """
+    Compute the multidimensional flattening coefficient
+    
+    Notes
+    -----
+    
+    This routine is *specific* to compressible hydrodynamics.
+    Only use with other solvers if you're sure it does what you want!
+    """
 
     xi = myg.scratch_array()
 
