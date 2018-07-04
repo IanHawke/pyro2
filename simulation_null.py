@@ -88,6 +88,16 @@ def bc_setup(rp):
 
 
 class NullSimulation(object):
+    """
+    The simulation object stores and controls all data for a single
+    simulation. Each solver will inherit from this base.
+    
+    In particular, it is expected that a new solver will override
+    (at least) the `initialize`, `method_compute_timestep`, `evolve`,
+    and `dovis` routines.
+    
+    See advection/simulation.py for an example of how to use this.
+    """
 
     def __init__(self, solver_name, problem_name, rp, timers=None, data_class=patch.CellCenterData2d):
         """
@@ -95,6 +105,9 @@ class NullSimulation(object):
 
         Parameters
         ----------
+        solver_name : str
+            The name of the solver to use (eg advection, 
+            compressible, etc)
         problem_name : str
             The name of the problem we wish to run.  This should
             correspond to one of the modules in advection/problems/
