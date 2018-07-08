@@ -276,6 +276,8 @@ with their data.
 
 ## Getting help
 
+  See the [contributing guide](https://github.com/zingale/pyro2/blob/master/CONTRIBUTING.md)
+  for how to get help, raise issues or contribute to the code.
   Join the mailing list to say up-to-date:
 
   https://groups.google.com/forum/#!forum/pyro-code
