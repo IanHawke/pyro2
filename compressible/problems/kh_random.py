@@ -35,6 +35,10 @@ def init_data(my_data, rp):
     interface_as = (interface_as.T/np.sum(interface_as, axis=1)).T # Normalize so sum = 1
     interface_bs = -np.pi + 2*np.pi*np.random.rand(2, 10)
 
+    print("Generated random numbers:")
+    print("a:", interface_as)
+    print("b:", interface_bs)
+
     epsilon = rp.get_param("kh.epsilon")
 
     def interface1(x):
