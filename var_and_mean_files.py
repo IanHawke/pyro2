@@ -49,7 +49,7 @@ def makeplot(basename, outfile, width, height):
         all_densities[i, :, :] = q[:, :, ivars.irho]
         u = q[:, :, ivars.iu]
         v = q[:, :, ivars.iv]
-        all_vorticities[i, 1:-1, 1:-1] = ((v[1:-1, 2:] - v[1:-1, :-2]) / dx -
+        all_vorticities[i, 1:-1, 1:-1] = ((v[2:, 1:-1] - v[:-2, 1:-1]) / dx -
                                           (u[1:-1, 2:] - u[1:-1, :-2]) / dy)
 
     mean_rho = all_densities.mean(axis=0)
