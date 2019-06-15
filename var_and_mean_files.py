@@ -49,8 +49,19 @@ def makeplot(basename, outfile, width, height):
         all_densities[i, :, :] = q[:, :, ivars.irho]
         u = q[:, :, ivars.iu]
         v = q[:, :, ivars.iv]
-        all_vorticities[i, 1:-1, 1:-1] = ((v[2:, 1:-1] - v[:-2, 1:-1]) / dx -
-                                          (u[1:-1, 2:] - u[1:-1, :-2]) / dy)
+        dvx_up = (v[2:, 1:-1] - v[1:-1, 1:-1]) / dx
+        dvx_do = (v[1:-1, 1:-1] - v[:-2, 1:-1]) / dx
+        dvx = numpy.where(dvx_up * dvx_do <= 0,
+                          numpy.zeros_like(dvx_up),
+                          numpy.where(numpy.abs(dvx_up) < numpy.abs(dvx_do),
+                                      dvx_up, dvx_do))
+        duy_up = (u[1:-1, 2:] - u[1:-1, 1:-1]) / dy
+        duy_do = (u[1:-1, 1:-1] - u[1:-1, :-2]) / dy
+        duy = numpy.where(duy_up * duy_do <= 0,
+                          numpy.zeros_like(duy_up),
+                          numpy.where(numpy.abs(duy_up) < numpy.abs(duy_do),
+                                      duy_up, duy_do))
+        all_vorticities[i, 1:-1, 1:-1] = dvx - duy
 
     mean_rho = all_densities.mean(axis=0)
     var_rho = all_densities.var(axis=0)
