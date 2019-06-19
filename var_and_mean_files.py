@@ -34,7 +34,8 @@ def makeplot(basename, outfile, width, height):
 
     sim_first = io.read(files[0])
     ivars = compressible.Variables(sim_first.cc_data)
-    files_size = (len(files), *sim_first.cc_data.get_vars().shape[:2])
+    # files_size = (len(files), *sim_first.cc_data.get_vars().shape[:2])
+    files_size = (len(files), myg.ihi-myg.ilo+1, myg.jhi-myg.jlo+1)
     print(files_size)
     all_densities = numpy.zeros(files_size)
     all_vorticities = numpy.zeros_like(all_densities)
@@ -46,7 +47,7 @@ def makeplot(basename, outfile, width, height):
         dy = s.cc_data.grid.dy
         q = compressible.cons_to_prim(s.cc_data.data, gamma, ivars,
                                       s.cc_data.grid)
-        all_densities[i, :, :] = q[:, :, ivars.irho]
+        all_densities[i, :, :] = q[myg.ilo:myg.ihi, myg.jlo:myg.jhi, ivars.irho]
         u = q[:, :, ivars.iu]
         v = q[:, :, ivars.iv]
         dvx_up = (v[2:, 1:-1] - v[1:-1, 1:-1]) / dx
@@ -104,32 +105,32 @@ def makeplot(basename, outfile, width, height):
         plt.savefig(outfile)
 #    plt.show()
 
-#   Now try doing the KDE plot
-#   See https://seaborn.pydata.org/tutorial/distributions.html
-#   We're doing a slice along the middle of x.
-#    max_density = numpy.max(all_densities)
-#    min_density = numpy.min(all_densities)
-#    d_density = max_density - min_density
-#    support = numpy.linspace(min_density - d_density, max_density + d_density,
-#                             500)
-#    kdensity = numpy.zeros((len(support), files_size[2]))
-#    i_c = files_size[1]//2
-#    for j_y in range(files_size[2]):
-#        densities = all_densities[:, i_c, j_y]
-#        bandwidth = 1.06 * densities.std() * densities.size ** (-1 / 5.)
-#        kernels = []
-#        for x_i in densities:
-#            kernel = stats.norm(x_i, bandwidth).pdf(support)
-#            kernels.append(kernel)
-#        kdensity[:, j_y] = numpy.sum(kernels, axis=0)
-#        kdensity[:, j_y] /= trapz(kdensity[:, j_y], support)
-#
-#    plt.figure()
-#    plt.imshow(numpy.transpose(kdensity),
-#               interpolation="nearest", origin="lower",
-#               extent=[myg.xmin, myg.xmax, myg.ymin, myg.ymax],
-#               cmap=s.cm)
-#    plt.show()
+  # Now try doing the KDE plot
+  # See https://seaborn.pydata.org/tutorial/distributions.html
+  # We're doing a slice along the middle of x.
+    max_density = numpy.max(all_densities)
+    min_density = numpy.min(all_densities)
+    d_density = max_density - min_density
+    support = numpy.linspace(min_density - d_density, max_density + d_density,
+                            500)
+    kdensity = numpy.zeros((len(support), files_size[2]))
+    i_c = files_size[1]//2
+    for j_y in range(files_size[2]):
+       densities = all_densities[:, i_c, j_y]
+       bandwidth = 1.06 * densities.std() * densities.size ** (-1 / 5.)
+       kernels = []
+       for x_i in densities:
+           kernel = stats.norm(x_i, bandwidth).pdf(support)
+           kernels.append(kernel)
+       kdensity[:, j_y] = numpy.sum(kernels, axis=0)
+       kdensity[:, j_y] /= trapz(kdensity[:, j_y], support)
+
+    plt.figure()
+    plt.imshow(numpy.transpose(kdensity),
+              interpolation="nearest", origin="lower",
+              extent=[myg.xmin, myg.xmax, myg.ymin, myg.ymax],
+              cmap=s.cm)
+    plt.show()
 #    Surface plot doesn't look good?
 #    fig = plt.figure()
 #    ax = fig.add_subplot(111, projection='3d')
